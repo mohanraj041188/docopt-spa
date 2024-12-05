@@ -1,0 +1,38 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 5vw 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  &__logo {
+    width: 50px;
+  }
+
+  &__navigations {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    &--items {
+      font-family: Inter;
+      padding: 16px 20px;
+      border-width: 0;
+      border-radius: 10px;
+      background-color: transparent;
+      border-color: transparent;
+      cursor: pointer;
+      color: rgba(0, 0, 0, 0.75);
+
+      &-button {
+        background: linear-gradient(to bottom right, #4c4c4c, #2c2c2c);
+        color: var(--clr-secondary);
+      }
+    }
+  }
+}

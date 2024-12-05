@@ -1,0 +1,12 @@
+.openstreetmap {
+  margin: 20px auto;
+  max-width: 600px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.openstreetmap .leaflet-container {
+  height: 400px;
+  width: 100%;
+}
