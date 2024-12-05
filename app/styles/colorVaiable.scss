@@ -1,0 +1,14 @@
+:root {
+  --clr-menu_bg: #eee;
+  --clr-primary: var(--clr-menu_bg);
+  --clr-secondary: white;
+  --color-dark: 44, 44, 44;
+  --clr-l2-black: #0f1116;
+  --clr-edge_gray_2: #565656;
+  --clr-txt-highlight: #2c2c2c25;
+
+  --text-base: 1rem;
+  --text-opacity: 0.5;
+  --space-unit: 1rem;
+  --space-base: calc(1 * var(--space-unit));
+}

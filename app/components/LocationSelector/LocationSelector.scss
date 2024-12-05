@@ -1,0 +1,111 @@
+.locality-wrapper {
+  grid-area: 1 / 2 / 2 / 3;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  font-feature-settings: normal;
+  font-variant: normal;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  &__searchbox {
+    padding: 0.5rem 0.75rem 0.5rem 0.75rem;
+    font-size: 1rem;
+    font-family: Inter;
+    min-width: 0;
+    height: calc(2rem + 0.75rem);
+    width: 100%;
+    color: #000;
+    background-color: transparent;
+    border: none;
+    appearance: none;
+    border-radius: 0;
+    box-sizing: border-box;
+
+    &_wrapper {
+      width: 100%;
+      transform: scale(0.9524);
+      transition: transform ease 0.4s;
+      position: relative;
+
+      .suggestion-list {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 54px;
+        margin-top: 2px;
+        background: #ffffff;
+        width: 100%;
+        border-radius: 16px;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 18px 48px;
+        z-index: 2;
+        overflow: hidden;
+        .suggestion-group {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          background-color: #fff;
+          &_item {
+            padding: 10px 12px;
+            font-size: 14px;
+            border-bottom: 1px solid #e0e0e5;
+            line-height: 1.5;
+            color: #414146;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-align: left;
+            width: 100%;
+
+            &__media {
+              width: 25px;
+              height: 25px;
+
+              &_icon {
+                opacity: .33;
+                color: black;
+              }
+            }
+
+            &__content {
+              vertical-align: middle;
+
+              &_text {
+                font-size: 12px;
+                color: #787887;
+                text-transform: capitalize;
+              }
+            }
+          }
+        }
+
+        &_group {
+          text-align: left;
+          &-item {
+            padding: 10px 12px;
+            font-size: 14px;
+            border-bottom: 1px solid #e0e0e5;
+            line-height: 1.5;
+            color: #414146;
+            background: #fff;
+            cursor: pointer;
+            &__text {
+              color: #14bef0;
+              font-weight: 700;
+              line-height: 24px;
+            }
+          }
+        }
+      }
+    }
+
+    &_icon {
+      margin-left: 20px;
+      width: 25px;
+      height: 25px;
+      opacity: .33;
+      color: black;
+    }
+  }
+}
