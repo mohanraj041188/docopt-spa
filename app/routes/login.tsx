@@ -1,49 +1,76 @@
-// routes/login.jsx
-import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import { getSession } from "~/utlis/session.server";
+import { useState, useEffect } from "react";
 
-export const loader = async ({ request }) => {
-  const session = await getSession(request.headers.get("Cookie"));
-  const user = session.get("user");
-  if (!user) {
-    return json({ isLoggedIn: false, user: null });
-  }
-  return json({ isLoggedIn: true, user });
-};
+export default function LoginPage() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
 
-export const action = async ({ request }) => {
-  const formData = await request.formData();
-  const email = formData.get("email");
-  const password = formData.get("password");
+  // Check session on component mount
+  useEffect(() => {
+    // Replace with your API endpoint for session validation
+    fetch("/api/check-session")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.isLoggedIn) {
+          setIsLoggedIn(true);
+          setUser(data.user);
+        }
+      })
+      .catch(() => {
+        setIsLoggedIn(false);
+      });
+  }, []);
 
-  // Replace this with your authentication logic
-  if (email === "test@example.com" && password === "12345") {
-    const session = await getSession();
-    session.set("user", { name: "John Doe", email });
+  // Handle form submission
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const email = formData.get("email");
+    const password = formData.get("password");
 
-    return json(
-      { success: true },
-      {
-        headers: {
-          "Set-Cookie": await commitSession(session),
-        },
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = await response.json();
+      if (data.success) {
+        setIsLoggedIn(true);
+        setUser(data.user);
+        setError(null);
+      } else {
+        setError(data.error);
       }
+    } catch {
+      setError("An unexpected error occurred. Please try again.");
+    }
+  };
+
+  if (isLoggedIn) {
+    return (
+      <div>
+        <h1>Welcome, {user?.name}!</h1>
+        <p>Email: {user?.email}</p>
+      </div>
     );
   }
 
-  return json({ success: false, error: "Invalid credentials" });
-};
-
-export default function LoginPage() {
-  const { isLoggedIn, user } = useLoaderData();
-  if (!isLoggedIn) {
-    return <p>You are not logged in. Please log in to continue.</p>;
-  }
   return (
     <div>
-      <h1>Welcome, {user.name}!</h1>
-      <p>Email: {user.email}</p>
+      <h1>Login</h1>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      <form onSubmit={handleLogin}>
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div>
+          <label htmlFor="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <button type="submit">Login</button>
+      </form>
     </div>
   );
 }
