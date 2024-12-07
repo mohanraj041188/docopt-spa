@@ -2,7 +2,7 @@ import "./PopupModal.scss";
 
 import { LogoIcon, CloseIcon } from "../icons";
 
-function PopupModal({ onClose, children }) {
+export default function PopupModal({ onClose, children }) {
   return (
     <div className="popup-modal">
       <div className="popup-modal__wrapper">
@@ -19,5 +19,3 @@ function PopupModal({ onClose, children }) {
     </div>
   );
 }
-
-export default PopupModal;
