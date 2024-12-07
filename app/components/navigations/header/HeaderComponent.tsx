@@ -18,9 +18,10 @@ const navLinks = [
   },
 ];
 
-export default function HeaderComponent({ user, showSignup, showModal, }) {
+export default function HeaderComponent({ user, showModal, showSignup }) {
   const handleModalOpen = (methodType: string | undefined) => {
-    showSignup = methodType === "signup";
+    showSignup(methodType === "signup");
+    showModal(true);
   };
 
   return (
